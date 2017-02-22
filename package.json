@@ -2,6 +2,7 @@
   "name": "ai-text",
   "version": "1.0.0",
   "description": "",
+  "repository": "fathergoose/aiText",
   "main": "js/app.js",
   "dependencies": {
     "browserify": "^14.1.0"
