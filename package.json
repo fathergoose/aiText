@@ -10,7 +10,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": ""
+    "build": "node_modules/.bin/browserify --debug js/app.js > dist/bundle.js"
   },
   "author": "",
   "license": "ISC"

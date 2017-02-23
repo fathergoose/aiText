@@ -1,6 +1,11 @@
-var ta = document.querySelector('textarea');
+const observer = require('./observer');
+const Subject = require('./subject');
+const extend = require('./extend');
+
 var main = document.querySelector('#main');
-var in1 = document.querySelector('#one');
+
+
+/* Insert Mode */
 
 window.addEventListener('keydown', function (event) {
   switch (event.which) {
@@ -13,5 +18,21 @@ window.addEventListener('keydown', function (event) {
     default:
       main.innerText += event.key;
   }
-      
-})
+
+});
+
+function TextBuffer() {
+    this.lines = [ 'hi al', 'boo index 1'];
+}
+
+TextBuffer.prototype.getLine = function (lineNumber) {
+    return this.lines[lineNumber];
+};
+
+TextBuffer.prototype.putLine = function (line) {
+    this.lines.push(line)
+    return this.lines.length;
+};
+
+
+window.appTextBuffer = TextBuffer;
