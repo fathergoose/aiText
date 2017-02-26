@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "repository": "fathergoose/aiText",
-  "main": "js/app.js",
+  "main": "app/js/app.js",
   "dependencies": {
     "browserify": "^14.1.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node_modules/.bin/browserify --debug js/app.js > dist/bundle.js"
+    "build": "node_modules/.bin/browserify --debug app/js/app.js > dist/bundle.js"
   },
   "author": "",
   "license": "ISC"
