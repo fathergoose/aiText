@@ -1,6 +1,5 @@
 exports.keyboard = {
     handle: function(event) {
-        console.log(this)
         var buffer = this.textBuffer;
         switch (event.which) {
             case 8: // backspace
@@ -20,14 +19,12 @@ exports.keyboard = {
     }
 };
 
-exports.click = function () {
-    return {
-        updateCaret: function () {
-            var range = document.caretRangeFromPoint(e.clientX, e.clientY);
-            var textNode = range.startContainer;
-            var offset = range.startOffset;
-            textBuffer.caretPosition = offset;
-            caret.update(); 
-        }
+exports.click =  {
+    updateCaret: function (e) {
+        var range = document.caretRangeFromPoint(e.clientX, e.clientY);
+        var textNode = range.startContainer;
+        var offset = range.startOffset;
+        textBuffer.caretPosition = offset;
+        caret.update();
     }
 };
