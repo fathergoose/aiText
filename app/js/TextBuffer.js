@@ -1,18 +1,17 @@
 function TextBuffer() {
     var caretPosition = 0;
     var currentLine = 0;
+    var lines = [''];
     return {
-        lines: [''],
 
         line: function() {
-          return this.lines[this.currentLine];
+          return lines[ currentLine];
         },
 
         // add a single character at current caret position and incriment caret
         putChar: function(char) {
-            var ln = this.lines[this.currentLine]
-            this.lines[this.currentLine] = this.lines[this.currentLine].slice(0, this.caretPosition) + char + this.lines[this.currentLine].slice(this.caretPosition);
-            this.caretPosition++;
+            lines[currentLine] = lines[currentLine].slice(0, caretPosition) + char + lines[currentLine].slice(caretPosition);
+            caretPosition++;
             console.log(this);
         },
 
@@ -23,16 +22,35 @@ function TextBuffer() {
             newLine.setAttribute('class', 'line');
             newLine.addEventListener("click", updateCaretByClick, false)
             main.appendChild(newLine);
-            this.lines[this.currentLine + 1] = this.lines[this.currentLine].slice(this.caretPosition, -1);
-            this.lines[this.currentLine] = this.lines[this.currentLine].slice(0, this.caretPosition);
-            this.currentLine += 1;
-            this.caretPosition = 0;
+            lines[currentLine + 1] = lines[currentLine].slice(caretPosition, -1);
+            lines[currentLine] = lines[currentLine].slice(0, caretPosition);
+            currentLine += 1;
+            caretPosition = 0;
         },
 
         deleteBackwards: function(int) {
-            this.lines[this.currentLine] = this.lines[this.currentLine].slice(0, this.caretPosition - int) + this.lines[this.currentLine].slice(this.caretPosition)
-            this.caretPosition -= int;
+            lines[currentLine] = lines[currentLine].slice(0, caretPosition - int) + lines[currentLine].slice(caretPosition)
+            caretPosition -= int;
+        },
+
+        getLines: function(begining, ending) {
+            if (arguments.length === 0) {
+                return lines;
+            } else if (Array.isArray(begining)) {
+                let returningLines = {};
+                begining.forEach( lineNumber => returningLines[lineNumber] = lines[lineNumber] )
+                return returningLines;
+            } else if (begining && ending) {
+                let returningLines = {};
+                for (let i = begining; i < ending; i++) {
+                    returningLines[i] = lines[i];
+                }
+                return returningLines;
+            } else {
+                throw new Error('Inproper use of TextBuffer.getLines()')
+            }
         }
+
     }
 }
 
