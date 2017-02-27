@@ -2,11 +2,13 @@ const Observer = require('./SubjectObserver/observer');
 const Subject = require('./SubjectObserver/subject');
 const TextBuffer = require('./TextBuffer');
 const extend = require('./extend');
+const input = require('./input');
 
 var main = document.querySelector('#main');
 
 
 var textBuffer = new TextBuffer();
+window.textBuffer = textBuffer;
 extend(textBuffer, new Subject());
 
 var firstLine = document.createElement('div');
@@ -21,33 +23,14 @@ linesOnScreen.update = function() {
     });
 };
 /* Insert Mode */
-window.addEventListener('keydown', function(event) {
-    var T = textBuffer;
-    switch (event.which) {
-        case 8: // backspace
-            T.deleteBackwards(1);
-            T.notify();
-            break;
-        case 13: // enter
-            T.newLine();
-            T.notify();
-            break;
-        case 16: // shift
-            break;
-        default:
-            T.putChar(event.key)
-            T.notify();
-    }
-
-});
-
+window.addEventListener('keydown', input.keyboard.handle) ;
 
 
 /////////////////////
 
 var paragraphs = document.getElementsByClassName("line");
 for (i = 0; i < paragraphs.length; i++) {
-    paragraphs[i].addEventListener("click", updateCaretByClick, false);
+    paragraphs[i].addEventListener("click", input.click.updateCaret, false);
 }
 var caret = document.createElement('div');
 caret.setAttribute('id', 'caret');
