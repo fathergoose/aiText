@@ -1,5 +1,5 @@
-const observer = require('./observer');
-const Subject = require('./subject');
+const observer = require('./SubjectObserver/observer');
+const Subject = require('./SubjectObserver/subject');
 const extend = require('./extend');
 
 var main = document.querySelector('#main');
