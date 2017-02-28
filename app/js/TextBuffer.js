@@ -1,5 +1,10 @@
 var Caret = require('./DOM/caret');
 
+/**
+ * The most interesting class around, this is where the magic happens 
+ * 
+ * @returns {Object}
+ */
 function TextBuffer() {
     var caretPosition = 0;
     var currentLine = 0;
@@ -28,10 +33,18 @@ function TextBuffer() {
             currentLine += 1;
             caretPosition = 0;
         },
+ 
+        deleteLineBackwards: function (int=1) {
+            console.log(this)
+            lines.splice(currentLine, int);
+            currentLine -= int;
+            caretPosition = lines[currentLine].length;
+        },
 
         deleteBackwards: function (int) {
-            lines[currentLine] = lines[currentLine].slice(0, caretPosition - int) + lines[currentLine].slice(caretPosition)
-            caretPosition -= int;
+            lines[currentLine] = lines[currentLine].slice(0, caretPosition - int) + lines[currentLine].slice(caretPosition);
+            if (caretPosition > 0) caretPosition -= int;
+            else this.deleteLineBackwards();
         },
 
         /**
