@@ -9,6 +9,7 @@ function TextBuffer() {
     var caretPosition = 0;
     var currentLine = 0;
     var lines = [''];
+ 
     return {
 
         line: function () {
@@ -52,8 +53,9 @@ function TextBuffer() {
          * 
          * @param {(number|number[])} begining 
          * @param {number} ending 
-         * @returns {Object|Array} Object[lineNumber] = String for specific lists or range requests
-         * when no arguments are passed an array of all lines is returned 
+         * @returns {Object|Array|String} Object[lineNumber] = String for specific lists or range requests
+         * when no arguments are passed an array of all lines is returned if a single line is requested,
+         * just that line is returned as a string
          */
         getLines: function (begining, ending) {
             if (arguments.length === 0) {
@@ -68,6 +70,8 @@ function TextBuffer() {
                     returningLines[i] = lines[i];
                 }
                 return returningLines;
+            } else if (begining || begining === 0) {
+                return lines[begining]
             } else {
                 throw new Error('Inproper use of TextBuffer.getLines()')
             }
@@ -77,7 +81,7 @@ function TextBuffer() {
             return caretPosition;
         },
 
-        getCurrentLine: function () {
+        getCurrentLineNumber: function () {
             return currentLine;
         }
 
