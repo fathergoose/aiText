@@ -24,7 +24,7 @@ exports.click =  {
         var range = document.caretRangeFromPoint(e.clientX, e.clientY);
         var textNode = range.startContainer;
         var offset = range.startOffset;
-        textBuffer.caretPosition = offset;
-        caret.update();
+        window.textBuffer.setCaretPosition(offset);
+        window.textBuffer.notify();
     }
 };

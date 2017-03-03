@@ -4,7 +4,7 @@ const extend = require('../extend');
 function Caret(buffer) {
     this.textBuffer = buffer;
     this.element = document.createElement('div');
-    this.element.setAttribute('id', 'caret');
+    this.element.setAttribute('id', 'cursor');
     extend(this, new Observer());
     buffer.addObserver(this);
 
