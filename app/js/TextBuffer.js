@@ -19,7 +19,7 @@ function TextBuffer() {
         // add a single character at current caret position and incriment caret
         putChar: function (char) {
             lines[currentLine] = lines[currentLine].slice(0, caretPosition) + char + lines[currentLine].slice(caretPosition);
-            caretPosition++;
+            caretPosition = caretPosition + char.length;
         },
 
         // insert new empty line below current line
@@ -42,7 +42,7 @@ function TextBuffer() {
             caretPosition = lines[currentLine].length;
         },
 
-        deleteBackwards: function (int) {
+        deleteBackwards: function (int=1) {
             lines[currentLine] = lines[currentLine].slice(0, caretPosition - int) + lines[currentLine].slice(caretPosition);
             if (caretPosition > 0) caretPosition -= int;
             else this.deleteLineBackwards();
@@ -83,6 +83,31 @@ function TextBuffer() {
 
         getCurrentLineNumber: function () {
             return currentLine;
+        },
+
+        /**
+         * 
+         * 
+         * @param {string} line 
+         * @param {number} whereToInsert 
+         * @returns {number} new length of lines object
+         */
+        putLine: function (line, whereToInsert) {
+            lines.splice(whereToInsert, 0, line)
+            return lines.length;
+        },
+
+        /**
+         * Set the caret position, does not affect currentLine 
+         * 
+         * @param {number} newPositionForCaret 
+         */
+        setCaretPosition: function (newPositionForCaret) {
+            caretPosition = newPositionForCaret;
+        },
+
+        setCurrentLine: function (newActiveLineNumber) {
+            currentLine = newActiveLineNumber;
         }
 
     }

@@ -13,12 +13,12 @@ function Caret(buffer) {
         var textBuffer = this.textBuffer;
         this.element.setAttribute('style', 'height: 100%; width: .6em; position: absolute; display: inline; top: 0; border-left: 1px; opacity: 1; animation: fade 1s ease-in-out infinite;');
         var pos
-        if (linesOnScreen[textBuffer.getCurrentLine()].firstChild != null) {
-            pos = linesOnScreen[textBuffer.getCurrentLine()].firstChild.splitText(textBuffer.getCaretPosition());
-            linesOnScreen[textBuffer.getCurrentLine()].insertBefore(this.element, pos)
+        if (linesOnScreen[textBuffer.getCurrentLineNumber()].firstChild != null) {
+            pos = linesOnScreen[textBuffer.getCurrentLineNumber()].firstChild.splitText(textBuffer.getCaretPosition());
+            linesOnScreen[textBuffer.getCurrentLineNumber()].insertBefore(this.element, pos)
         } else {
-            console.log(linesOnScreen[textBuffer.getCurrentLine()]);
-            linesOnScreen[textBuffer.getCurrentLine()].appendChild(this.element);
+            console.log(linesOnScreen[textBuffer.getCurrentLineNumber()]);
+            linesOnScreen[textBuffer.getCurrentLineNumber()].appendChild(this.element);
         }
     };
 }

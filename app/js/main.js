@@ -34,6 +34,7 @@ for (i = 0; i < paragraphs.length; i++) {
     paragraphs[i].addEventListener("click", input.click.updateCaret, false);
 }
 var caret = new Caret(textBuffer);
+caret.update();
 
 
 
